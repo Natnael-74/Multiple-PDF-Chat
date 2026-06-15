@@ -61,3 +61,16 @@ def upload_and_index_document(file: UploadFile = File(...)):
 @app.get("/list-docs", response_model=list[DocumentInfo])
 def list_documents():
     return get_all_documents()
+
+@app.post("/delete-doc")
+def delete_document(request: DeleteFileRequest):
+    chroma_delete_success = delete_doc_from_chroma(request.file_id)
+
+    if chroma_delete_success:
+        db_delete_success = delete_document_record(request.file_id)
+        if db_delete_success:
+            return {"message": f"Successfully deleted document with file_id {request.file_id} from the system."}
+        else:
+            return {"error": f"Deleted from Chroma but failed to delete document with file_id {request.file_id} from the database."}
+    else:
+        return {"error": f"Failed to delete document with file_id {request.file_id} from Chroma."}
