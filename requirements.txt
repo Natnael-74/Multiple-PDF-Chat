@@ -1,2 +1,6 @@
 langchain
-langchain-openai
+langchain_openai
+langchain_community
+langchain_text_splitters
+langchain_vectorstores
+langchain_documents
