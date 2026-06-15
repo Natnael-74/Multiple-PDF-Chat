@@ -57,3 +57,7 @@ def upload_and_index_document(file: UploadFile = File(...)):
     finally:
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
+
+@app.get("/list-docs", response_model=list[DocumentInfo])
+def list_documents():
+    return get_all_documents()
