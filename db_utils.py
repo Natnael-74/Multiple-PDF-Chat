@@ -27,6 +27,26 @@ def create_document_store():
                      upload_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     conn.close()
 
+# application log operations
+def insert_application_logs(session_id, user_query, gpt_response, model):
+    conn = get_db_connection()
+    conn.execute('INSERT INTO application_logs (session_id, user_query, gpt_response, model) VALUES (?, ?, ?, ?)',
+                 (session_id, user_query, gpt_response, model))
+    conn.commit()
+    conn.close()
+
+def get_chat_history(session_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT user_query, gpt_response FROM application_logs WHERE session_id = ? ORDER BY created_at', (session_id,))
+    messages = []
+    for row in cursor.fetchall():
+        messages.extend([
+            {"role": "human", "content": row['user_query']},
+            {"role": "ai", "content": row['gpt_response']}
+        ])
+    conn.close()
+    return messages
 
 
 # document store operations
