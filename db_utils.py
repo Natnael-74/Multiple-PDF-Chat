@@ -27,6 +27,9 @@ def create_document_store():
                      upload_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
     conn.close()
 
+
+
+# document store operations
 def insert_document_record(filename):
     conn = get_db_connection()
     cursor = conn.cursor()
