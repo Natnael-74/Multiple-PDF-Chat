@@ -1,3 +1,2 @@
-/.python-version
-/main.py
-/pyproject.toml
+.env
+uv.lock
