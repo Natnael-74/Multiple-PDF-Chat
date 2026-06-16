@@ -4,6 +4,9 @@ from chat_interface import display_chat_interface
 
 st.title("Langchain RAG Chatbot")
 
+# The use of st.session_state is crucial here. It 
+# allows us to persist data across reruns of the Streamlit app, 
+# ensuring that chat history and session information are maintained.
 # Initialize session state variables
 if "messages" not in st.session_state:
     st.session_state.messages = []
