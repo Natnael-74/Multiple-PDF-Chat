@@ -32,3 +32,5 @@ qa_prompt = ChatPromptTemplate.from_messages([
     MessagesPlaceholder(variable_name="chat_history"),
     ("human", "{input}")
 ])
+
+
