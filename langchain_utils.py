@@ -33,4 +33,9 @@ qa_prompt = ChatPromptTemplate.from_messages([
     ("human", "{input}")
 ])
 
-
+def get_rag_chain(model="gpt-4o-mini"):
+    llm = ChatOpenAI(model=model)
+    history_aware_retriever = create_history_aware_retriever(llm, retriever, contextualize_q_prompt)
+    question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
+    rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)    
+    return rag_chain
