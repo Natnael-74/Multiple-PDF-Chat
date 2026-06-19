@@ -18,7 +18,7 @@ def load_and_split_document(file_path: str) -> List[Document]:
     elif file_path.endswith('.html'):
         loader = UnstructuredHTMLLoader(file_path)
     else:
-        raise ValueError(f"Unsupported file type: {file_path}")
+        raise ValueError(f"Unsupported file type for: {file_path}")
     
     documents = loader.load()
     return text_splitter.split_documents(documents)
