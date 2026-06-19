@@ -35,7 +35,7 @@ def index_document_to_chroma(file_path: str, file_id: int) -> bool:
         # vectorstore.persist()
         return True
     except Exception as e:
-        print(f"Error indexing document: {e}")
+        print(f"Error indexing documents : {e}")
         return False
 
 def delete_doc_from_chroma(file_id: int):
@@ -50,4 +50,3 @@ def delete_doc_from_chroma(file_id: int):
     except Exception as e:
         print(f"Error deleting document with file_id {file_id} from Chroma: {str(e)}")
         return False
-        
